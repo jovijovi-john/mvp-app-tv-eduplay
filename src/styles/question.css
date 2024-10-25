@@ -1,0 +1,17 @@
+.top-text {
+    width: 50%;
+    border-radius: 10px;
+    background-color: white;
+    color: #019DD8;
+    font-size: 1.25rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.bottom-text {
+    color: white;
+    font-size: 2rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+    /*-webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;*/
+}
