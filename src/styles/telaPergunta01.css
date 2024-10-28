@@ -6,6 +6,13 @@
     align-items: center;
 }
 
+.middle {
+    height: 66.1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .bottom {
     height: 25.4%;
     width: 100%;

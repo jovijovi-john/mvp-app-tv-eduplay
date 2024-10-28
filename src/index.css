@@ -1,3 +1,14 @@
+:root {
+  --vermelho-color: #8F0000; /* Define the color variable */
+  --verde-color: #008F00;
+  --amarelo-color: #FFC107;
+  --azul-color: #00008F;
+  --vermelho-claro-color: #D75053;
+  --verde-claro-color: #48B048;
+  --amarelo-claro-color: #FFD148;
+  --azul-claro-color: #395FAC;
+}
+
 body {
   height: 100%;
   margin: 0;

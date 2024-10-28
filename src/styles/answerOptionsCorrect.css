@@ -28,18 +28,18 @@
     -webkit-text-stroke-color: black;
 }
 
-#opt-1{
+#opt-1-alt{
     background-color: var(--vermelho-color);
 }
 
-#opt-2{
-    background-color: var(--verde-color);
+#opt-2-alt{
+    background-color: var(--verde-claro-color);
 }
 
-#opt-3{
-    background-color: var(--amarelo-color);
+#opt-3-alt{
+    background-color: var(--amarelo-claro-color);
 }
 
-#opt-4{
-    background-color: var(--azul-color);
+#opt-4-alt{
+    background-color: var(--azul-claro-color);
 }
