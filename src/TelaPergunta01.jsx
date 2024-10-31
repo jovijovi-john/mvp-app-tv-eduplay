@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import "./styles/telaPergunta01.css"
 
 import { AnswerOptions } from "./components/AnswerOptions.jsx"
@@ -12,85 +12,99 @@ import { Timer } from "./components/Timer.jsx"
 import { AppIcon } from "./components/AppIcon.jsx"
 
 export default function TelaPergunta01() {
-    const currentRowIndexRef = useRef(0);
-    const currentElementIndexRef = useRef(0);
-    const telespecRef = useRef();
-    const confRef = useRef();
 
-    const focusableElements = [useRef([]), useRef([])];
-    let currentRowIndex = currentRowIndexRef.current;
-    let currentElementIndex = currentElementIndexRef.current;
+    const numOpt1 = useRef(0);
+    const numOpt2 = useRef(0);
+    const numOpt3 = useRef(0);
+    const numOpt4 = useRef(0);
+
+    const totalAnswers = 5
+    
+    const opt1 = useRef(null);
+    const opt2 = useRef(null);
+    const opt3 = useRef(null);
+    const opt4 = useRef(null);
+
+    const [answered, setAnswered] = useState(false)
+    const clickedOptId = useRef('')
 
     useEffect(() => {
-        document.getElementById('opt-1').focus();
+      if (!answered) {
+        console.log(opt1.current)
+        opt1.current.focus()
+        console.log(document.activeElement)
+      }
+    })
 
-        const handleKeyDown = (event) => {
-          switch (event.code) {
-            case "ArrowUp":
+    /*useEffect(() => {
+      const handleKeyDown = (event) => {
+        switch (event.code) {
+          case "ArrowUp":
               event.preventDefault();
-              if (currentRowIndex === 0) {
-                document.getElementById("opt-1").focus();
-              } else if (currentRowIndex > 0) {
-                currentRowIndex -= 1;
-                currentElementIndex = 0;
-                focusableElements[currentRowIndex].current[
-                  currentElementIndex
-                ].focus();
-              } else if (document.activeElement.id === "opt-3") {
-                focusableElements[currentRowIndex].current[
-                  currentElementIndex
-                ].focus();
+            
+              if (document.activeElement.id === "opt1") {
+                document.getElementById("opt3").focus();
               }
-              break;
-            case "ArrowDown":
-              event.preventDefault();
-              if (currentRowIndex === 2) {
-                document.getElementById("opt-1").focus();
-              } else if (document.activeElement === telespecRef.current) {
-                focusableElements[currentRowIndex].current[
-                  currentElementIndex
-                ].focus();
-              } else if (currentRowIndex < focusableElements.length - 1) {
-                currentRowIndex += 1;
-                currentElementIndex = 0;
-                focusableElements[currentRowIndex].current[
-                  currentElementIndex
-                ].focus();
-              }
-              break;
-            case "ArrowLeft":
-              event.preventDefault();
-              if (currentElementIndex > 0) {
-                currentElementIndex -= 1;
-                focusableElements[currentRowIndex].current[
-                  currentElementIndex
-                ].focus();
-              }
-              break;
-            case "ArrowRight":
-              event.preventDefault();
-              if (
-                currentElementIndex <
-                focusableElements[currentRowIndex].current.length - 1
-              ) {
-                currentElementIndex += 1;
-                focusableElements[currentRowIndex].current[
-                  currentElementIndex
-                ].focus();
-              }
-              break;
-            default:
-              break;
-          }
-          // audioQueue.push(audioFile);
-        };
-    
-        window.addEventListener("keydown", handleKeyDown);
-    
-        return () => {
-          window.removeEventListener("keydown", handleKeyDown);
-        };
-      })
+            break;
+          case "ArrowDown":
+            event.preventDefault();
+            
+            break;
+          case "ArrowLeft":
+            event.preventDefault();
+            
+            break;
+          case "ArrowRight":
+            event.preventDefault();
+            
+            break;
+          default:
+            break;
+        }
+        // audioQueue.push(audioFile);
+      };
+  
+      window.addEventListener("keydown", handleKeyDown);
+  
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [document.activeElement]);*/
+
+    const handleClick = (elem) => {
+      const className = elem.target.className
+      const elemId = elem.target.id
+
+      clickedOptId.current = elemId
+
+      switch(clickedOptId.current) {
+        case "opt-1":
+          numOpt1.current++
+          break
+        case "opt-2":
+          numOpt2.current++
+          break
+        case "opt-3":
+          numOpt3.current++
+          break
+        case "opt-4":
+          numOpt4.current++
+          break
+        default:
+          break
+        
+      }
+      
+      console.log(numOpt1.current)
+      console.log(numOpt2.current)
+      console.log(numOpt3.current)
+      console.log(numOpt4.current)
+
+      if (className === "answer-opt") {
+        console.log(elemId)
+        setAnswered(true);
+      }
+    }
 
     return (
         <>
@@ -113,10 +127,14 @@ export default function TelaPergunta01() {
                     </div>
                 </div>
                 <div className="middle">
-                    {<QuestionStatistics opt1_stat={20} opt2_stat={30} opt3_stat={10} opt4_stat={40} />}
+                    {answered ? <QuestionStatistics
+                      opt1_stat={(numOpt1.current/totalAnswers)*100}
+                      opt2_stat={(numOpt2.current/totalAnswers)*100}
+                      opt3_stat={(numOpt3.current/totalAnswers)*100}
+                      opt4_stat={(numOpt4.current/totalAnswers)*100} /> : <></>}
                 </div>
                 <div className="bottom">
-                    {<AnswerOptions optRef={focusableElements[currentRowIndex].current[currentElementIndex]} />}
+                    {answered ? <AnswerOptionsCorrect clickedOpt={clickedOptId.current} /> : <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} />}
                 </div>
             </div>
 
