@@ -12,8 +12,37 @@
     padding-bottom: 2px;
 }
 
+.statistics2 {
+    width: 11.1%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: end;
+    /*background-color: white;*/
+    border-radius: 5px;
+    border-bottom: 13px solid white;
+    padding-bottom: 2px;
+}
+
 .stat-opt {
     width: 22.3%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
+    color: white;
+
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+.stat-opt2 {
+    width: 45.3%;
     height: 40%;
     display: flex;
     align-items: center;

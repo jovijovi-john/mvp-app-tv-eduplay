@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import "../styles/answerOptionsCorrect.css";
 import chroma from 'chroma-js';
 
 
 
 
-export const AnswerOptionsCorrect = ({ clickedOpt }) => {
+export const AnswerOptionsCorrect = ({ optType, clickedOpt }) => {
     // const [colorChanged, setColorChanged] = useState(false)
 
     const darkenColor = (optId, factor) => {
@@ -23,16 +23,29 @@ export const AnswerOptionsCorrect = ({ clickedOpt }) => {
     };
 
     useEffect(() => {
-        darkenColor(clickedOpt, .65); // escurece a cor da opção selecionada quando renderiza este componente
+        if (clickedOpt) {
+            darkenColor(clickedOpt, .65); // escurece a cor da opção selecionada quando renderiza este componente
+        }
     }, [])
 
 
-    return (
-        <div className="bottom-options">
-            <input type="button" value="Mercúrio" key="0" id="opt-1-alt" className="answer-opt" />
-            <input type="button" value="Terra" key="1" id="opt-2-alt" className="answer-opt" />
-            <input type="button" value="Vênus" key="2" id="opt-3-alt" className="answer-opt" />
-            <input type="button" value="Marte" key="3" id="opt-4-alt" className="answer-opt" />
-        </div>
-    );
+    switch(optType) {
+        case 0:
+            return (
+                <div className="bottom-options2">
+                    <input type="button" value="Falso" key="0" id="opt-1-alt" className="answer-opt2" />
+                    <input type="button" value="Verdadeiro" key="1" id="opt-2-alt" className="answer-opt2" />
+                </div>
+            );
+        case 1:
+            return (
+                <div className="bottom-options">
+                    <input type="button" value="Mercúrio" key="0" id="opt-1-alt" className="answer-opt" />
+                    <input type="button" value="Terra" key="1" id="opt-2-alt" className="answer-opt" />
+                    <input type="button" value="Vênus" key="2" id="opt-3-alt" className="answer-opt" />
+                    <input type="button" value="Marte" key="3" id="opt-4-alt" className="answer-opt" />
+                </div>
+            );
+    }
+
 }

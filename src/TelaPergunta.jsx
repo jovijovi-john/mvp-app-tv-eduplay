@@ -1,32 +1,43 @@
 /* eslint-disable no-unused-vars */
-import { useRef, useEffect, useState } from 'react'
-import "./styles/telaPergunta01.css"
+import { useRef, useEffect, useState, useContext } from 'react'
+import "./styles/telaPergunta.css"
 
 import { AnswerOptions } from "./components/AnswerOptions.jsx"
 import { AnswerOptionsCorrect } from "./components/AnswerOptionsCorrect.jsx"
 
 import { Question } from "./components/Question.jsx"
 import { QuestionStatistics } from "./components/QuestionStatistics.jsx"
+import { QuestionState } from "./QuestionState.jsx"
 
 import { Timer } from "./components/Timer.jsx"
 import { AppIcon } from "./components/AppIcon.jsx"
 
-export default function TelaPergunta01() {
+export function TelaPergunta({ questType, questTimeLimit }) {
 
-    const numOpt1 = useRef(0);
-    const numOpt2 = useRef(0);
-    const numOpt3 = useRef(0);
-    const numOpt4 = useRef(0);
+    const numOpt1 = useRef(1);
+    const numOpt2 = useRef(1);
+    const numOpt3 = useRef(1);
+    const numOpt4 = useRef(1);
+
+    const timeLimit = useRef(questTimeLimit)
 
     const totalAnswers = 5
+    const questionType = questType
+    /**
+     * questionType 0 == Verdadeiro ou False
+     * questionType 1 == Quatro Opções
+     */
+
+    // const questionState = useContext(QuestionState)
     
     const opt1 = useRef(null);
     const opt2 = useRef(null);
     const opt3 = useRef(null);
     const opt4 = useRef(null);
 
-    const [answered, setAnswered] = useState(false)
+    const {answered, setAnswered, time, setTime} = useContext(QuestionState)
     const clickedOptId = useRef('')
+
 
     useEffect(() => {
       if (!answered) {
@@ -95,13 +106,13 @@ export default function TelaPergunta01() {
         
       }
       
-      console.log(numOpt1.current)
+      /*console.log(numOpt1.current)
       console.log(numOpt2.current)
       console.log(numOpt3.current)
-      console.log(numOpt4.current)
+      console.log(numOpt4.current)*/
 
-      if (className === "answer-opt") {
-        console.log(elemId)
+      if (className === "answer-opt" || className === "answer-opt2") {
+        // console.log(elemId)
         setAnswered(true);
       }
     }
@@ -123,21 +134,20 @@ export default function TelaPergunta01() {
                         }
                     </div>
                     <div id="timer">
-                        {<Timer current={60} />}
+                        {<Timer />}
                     </div>
                 </div>
                 <div className="middle">
-                    {answered ? <QuestionStatistics
+                    {answered ? <QuestionStatistics optType={questionType}
                       opt1_stat={(numOpt1.current/totalAnswers)*100}
                       opt2_stat={(numOpt2.current/totalAnswers)*100}
                       opt3_stat={(numOpt3.current/totalAnswers)*100}
                       opt4_stat={(numOpt4.current/totalAnswers)*100} /> : <></>}
                 </div>
                 <div className="bottom">
-                    {answered ? <AnswerOptionsCorrect clickedOpt={clickedOptId.current} /> : <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} />}
+                    {answered ? <AnswerOptionsCorrect optType={questionType} clickedOpt={clickedOptId.current} /> : <AnswerOptions optType={questionType} opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} />}
                 </div>
             </div>
-
         </>
     );
 }
