@@ -12,7 +12,7 @@ import { QuestionState } from "./QuestionState.jsx"
 import { Timer } from "./components/Timer.jsx"
 import { AppIcon } from "./components/AppIcon.jsx"
 
-export function TelaPergunta({ questType, questTimeLimit }) {
+export function TelaPergunta({ questType, questTimeLimit, questNum, questTotal, question }) {
 
     const numOpt1 = useRef(1);
     const numOpt2 = useRef(1);
@@ -41,9 +41,14 @@ export function TelaPergunta({ questType, questTimeLimit }) {
 
     useEffect(() => {
       if (!answered) {
-        console.log(opt1.current)
+        // console.log(opt1.current)
         opt1.current.focus()
-        console.log(document.activeElement)
+        // console.log(document.activeElement)
+      } else {
+        numOpt1.current = 1
+        numOpt2.current = 1
+        numOpt3.current = 1
+        numOpt4.current = 1
       }
     })
 
@@ -127,9 +132,9 @@ export function TelaPergunta({ questType, questTimeLimit }) {
                     <div id="question">
                         {
                             <Question
-                                question={"Qual é o planeta mais próximo do Sol?"}
-                                number={1}
-                                total={5}
+                                question={question}
+                                number={questNum}
+                                total={questTotal}
                             />
                         }
                     </div>

@@ -7,28 +7,17 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    background-color: white;
     border-radius: 56px;
 }
 
-.answer-opt {
-    width: 48.3%;
-    height: 40%;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    margin-left: 2px;
-    margin-right: 2px;
-    border-radius: 56px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 3rem;
-    color: white;
-
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
+.correct-answer-icon, .wrong-answer-icon {
+    position: absolute;
+    right: 10px;
+    height: 50%;
+    width: 18%;
 }
 
-#opt-1-alt{
+/*#opt-1-alt{
     background-color: var(--vermelho-claro-color);
 }
 
@@ -42,4 +31,4 @@
 
 #opt-4-alt{
     background-color: var(--azul-claro-color);
-}
+}*/

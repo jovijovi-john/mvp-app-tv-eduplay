@@ -55,3 +55,19 @@
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
 }
+
+#opt-1-stat{
+    background-color: var(--vermelho-color);
+}
+
+#opt-2-stat{
+    background-color: var(--verde-color);
+}
+
+#opt-3-stat{
+    background-color: var(--amarelo-color);
+}
+
+#opt-4-stat{
+    background-color: var(--azul-color);
+}
