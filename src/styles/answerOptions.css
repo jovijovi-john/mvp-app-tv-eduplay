@@ -59,6 +59,14 @@
     -webkit-text-stroke-color: black;*/
 }
 
+.opt-icon {
+    position: absolute;
+    left: 10px;
+    height: 100%;
+    width: 18%;
+    margin-bottom: -5%;
+}
+
 .answer-opt2-div, .answer-opt-div {
     position: relative;
     width: 48.3%;
