@@ -1,16 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import "../styles/answerOptionsCorrect.css";
 import chroma from 'chroma-js';
 import { MdDone } from "react-icons/md";
 import { FaX } from "react-icons/fa6";
+
+import { QuestionState } from "../QuestionState.jsx";
 
 import blue_option_icon from "../assets/blue_opt.svg";
 import green_option_icon from "../assets/green_opt.svg";
 import red_option_icon from "../assets/red_opt.svg";
 import yellow_option_icon from "../assets/yellow_opt.svg";
 
-export const AnswerOptionsCorrect = ({ optType, clickedOpt }) => {
+export const AnswerOptionsCorrect = ({ clickedOpt, correctOptId, optsText }) => {
     // const [colorChanged, setColorChanged] = useState(false)
+
+    const {isFinished, setIsFinished} = useContext(QuestionState)
+
+    const showCorrect = (optId) => {
+        const clickedButton = document.getElementById(optId);
+
+        clickedButton.setAttribute("style", "background-color: var(--verde-claro-color);")
+    }
 
     const darkenColor = (optId, factor) => {
         // console.log(optId+'-alt')
@@ -32,48 +42,37 @@ export const AnswerOptionsCorrect = ({ optType, clickedOpt }) => {
         }
     }, [])
 
+    useEffect(() => {
+        if(isFinished) {
+            showCorrect(correctOptId); // muda a cor de fundo das opções de resposta para mostrar a correta
+        }
 
-    switch(optType) {
-        case 0:
-            return (
-                <div className="bottom-options2">
-                    <div className="answer-opt2-div">
-                        <img src={red_option_icon} alt="Opção Vermelha" className="opt-icon" />
-                        <input type="button" value="Falso" key="0" id="opt-1-alt" className="answer-opt2" />
-                        {clickedOpt+"-alt" === "opt-1-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
-                    </div>
-                    <div className="answer-opt2-div">
-                        <img src={green_option_icon} alt="Opção Verde" className="opt-icon" />
-                        <input type="button" value="Verdadeiro" key="1" id="opt-2-alt" className="answer-opt2" />
-                        {clickedOpt+"-alt" === "opt-2-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
-                    </div>
-                </div>
-            );
-        case 1:
-            return (
-                <div className="bottom-options">
-                    <div className="answer-opt-div">
-                        <img src={red_option_icon} alt="Opção Vermelha" className="opt-icon" />
-                        <input type="button" value="Mercúrio" key="0" id="opt-1-alt" className="answer-opt" />
-                        {clickedOpt+"-alt" === "opt-1-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
-                    </div>
-                    <div className="answer-opt-div">
-                        <img src={green_option_icon} alt="Opção Verde" className="opt-icon" />
-                        <input type="button" value="Terra" key="1" id="opt-2-alt" className="answer-opt" />
-                        {clickedOpt+"-alt" === "opt-2-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
-                    </div>
-                    <div className="answer-opt-div">
-                        <img src={yellow_option_icon} alt="Opção Amarela" className="opt-icon" />
-                        <input type="button" value="Vênus" key="2" id="opt-3-alt" className="answer-opt" />
-                        {clickedOpt+"-alt" === "opt-3-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
-                    </div>
-                    <div className="answer-opt-div">
-                        <img src={blue_option_icon} alt="Opção Azul" className="opt-icon" />
-                        <input type="button" value="Marte" key="3" id="opt-4-alt" className="answer-opt" />
-                        {clickedOpt+"-alt" === "opt-4-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
-                    </div>
-                </div>
-            );
-    }
+        setIsFinished(false)
+    }, [isFinished])
+
+    return (
+        <div className="bottom-options">
+            <div className="answer-opt-div">
+                <img src={red_option_icon} alt="Opção Vermelha" className="opt-icon" />
+                <input type="button" value={optsText[0]} key="0" id="opt-1-alt" className="answer-opt" />
+                {clickedOpt+"-alt" === "opt-1-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
+            </div>
+            <div className="answer-opt-div">
+                <img src={green_option_icon} alt="Opção Verde" className="opt-icon" />
+                <input type="button" value={optsText[1]} key="1" id="opt-2-alt" className="answer-opt" />
+                {clickedOpt+"-alt" === "opt-2-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
+            </div>
+            <div className="answer-opt-div">
+                <img src={yellow_option_icon} alt="Opção Amarela" className="opt-icon" />
+                <input type="button" value={optsText[2]} key="2" id="opt-3-alt" className="answer-opt" />
+                {clickedOpt+"-alt" === "opt-3-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
+            </div>
+            <div className="answer-opt-div">
+                <img src={blue_option_icon} alt="Opção Azul" className="opt-icon" />
+                <input type="button" value={optsText[3]} key="3" id="opt-4-alt" className="answer-opt" />
+                {clickedOpt+"-alt" === "opt-4-alt" ? <MdDone className={"correct-answer-icon"} color={"#1376BC"} /> : <FaX className={"wrong-answer-icon"} color={"#1376BC"} />}
+            </div>
+        </div>
+    );
 
 }

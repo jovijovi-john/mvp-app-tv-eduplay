@@ -7,9 +7,10 @@ export function QuestionStateProvider({ children }) {
 
     const [answered, setAnswered] = useState(false)
     const [time, setTime] = useState(10)
+    const [isFinished, setIsFinished] = useState(false)
 
     return (
-        <QuestionState.Provider value={{answered, setAnswered, time, setTime}}>
+        <QuestionState.Provider value={{answered, setAnswered, time, setTime, isFinished, setIsFinished}}>
             {children}
         </QuestionState.Provider>
     );
