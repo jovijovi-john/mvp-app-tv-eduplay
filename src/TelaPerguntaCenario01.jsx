@@ -12,7 +12,7 @@ import { QuestionState } from "./QuestionState.jsx"
 import { TimerCenario01 } from "./components/TimerCenario01.jsx"
 import { AppIcon } from "./components/AppIcon.jsx"
 
-export function TelaPerguntaCenario01({ questType, questTimeLimit, questNum, questTotal, question }) {
+export function TelaPerguntaCenario01({ questType, questTimeLimit, questNum, questTotal, question, opts, correctOptIdx }) {
 
     const totalAnswers = 5
 
@@ -31,8 +31,8 @@ export function TelaPerguntaCenario01({ questType, questTimeLimit, questNum, que
     const opt3 = useRef(null);
     const opt4 = useRef(null);
 
-    const {answered, setAnswered, time, setTime} = useContext(QuestionState)
-    const clickedOptId = useRef('')
+    const {answered, setAnswered, time, setTime, clickedOptId} = useContext(QuestionState)
+    // const clickedOptId = useRef('')
 
     /*useEffect(() => {
       const handleKeyDown = (event) => {
@@ -109,7 +109,11 @@ export function TelaPerguntaCenario01({ questType, questTimeLimit, questNum, que
                       opt4_stat={(numOpt4.current/totalAnswers)*100} /> : <></>*/}
                 </div>
                 <div className="bottom">
-                    {answered ? <AnswerOptionsCorrect optType={questionType} clickedOpt={clickedOptId.current} /> : <AnswerOptions optType={questionType} opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} />}
+                    {
+                      answered ? <AnswerOptionsCorrect clickedOpt={clickedOptId.current} correctOptId={`opt-${correctOptIdx+1}-alt`} optsText={opts} />
+                      :
+                      <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} optsText={opts} correctOption={correctOptIdx} />
+                    }
                 </div>
             </div>
         </>

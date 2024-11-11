@@ -153,7 +153,7 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
                     {
                       answered ? <AnswerOptionsCorrect clickedOpt={clickedOptId.current} correctOptId={`opt-${correctOptIdx+1}-alt`} optsText={opts} />
                       :
-                      <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} optsText={opts} correctOption={correctOptIdx} />
+                      <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} /*clickFunc={handleClick}*/ optsText={opts} correctOption={correctOptIdx} />
                     }
                 </div>
             </div>
