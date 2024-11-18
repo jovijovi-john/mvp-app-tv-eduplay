@@ -38,7 +38,6 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
     const {answered, setAnswered, time, setTime, isFinished, setIsFinished} = useContext(QuestionState)
     const clickedOptId = useRef('')
 
-
     useEffect(() => {
       if (!answered) {
         // console.log(opt1.current)
@@ -142,7 +141,7 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
                         {<TimerCenario03 />}
                     </div>
                 </div>
-                <div className="middle">
+                <div id="middleDiv" className="middle">
                     {answered ? <QuestionStatistics
                       opt1_stat={(numOpt1.current/totalAnswers)*100}
                       opt2_stat={(numOpt2.current/totalAnswers)*100}
@@ -153,7 +152,7 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
                     {
                       answered ? <AnswerOptionsCorrect clickedOpt={clickedOptId.current} correctOptId={`opt-${correctOptIdx+1}-alt`} optsText={opts} />
                       :
-                      <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} /*clickFunc={handleClick}*/ optsText={opts} correctOption={correctOptIdx} />
+                      <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} optsText={opts} correctOption={correctOptIdx} />
                     }
                 </div>
             </div>

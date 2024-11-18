@@ -1,15 +1,16 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/timer.css";
 import { QuestionState } from "../QuestionState.jsx"
 
 export const TimerCenario03 = () => {
-    const {answered, setAnswered, time, setTime, setIsFinished} = useContext(QuestionState)
+    const {answered, setAnswered, time, setTime, isFinished, setIsFinished} = useContext(QuestionState)
     const [seconds, setSeconds] = useState(time)
+    // const middleDiv = useRef(document.getElementById("middleDiv"));
 
     const navigate = useNavigate();
 
-    useEffect(() => {
+    useEffect(() => { // Contagem regressiva
         const interval = setInterval(() => {
             if (seconds > 0) {
                 setSeconds(seconds-1)
@@ -19,11 +20,22 @@ export const TimerCenario03 = () => {
         return () => clearInterval(interval);
     }, [seconds])
 
+    /*useEffect(() => {
+        console.log(middleDiv.current)
+    }, [answered])*/
+
     useEffect(() => {
         let interval;
-
         if (seconds === 0) {
             interval = setInterval(() => {
+                /*const middleDiv = document.getElementById("middleDiv");
+                // const child = middleDiv.firstChild
+                if(middleDiv && middleDiv.childElementCount > 0) {
+                    console.log("entrou")
+                    middleDiv.innerHTML = ""
+                    // middleDiv.removeChild(child)
+                }*/
+
                 setIsFinished(true)
             }, 500)
         }
