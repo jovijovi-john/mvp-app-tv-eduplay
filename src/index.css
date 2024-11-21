@@ -10,6 +10,10 @@
   --azul-claro-color: #395FAC;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100%;
   margin: 0;

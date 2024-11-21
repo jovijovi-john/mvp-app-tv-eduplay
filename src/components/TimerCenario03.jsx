@@ -4,7 +4,7 @@ import "../styles/timer.css";
 import { QuestionState } from "../QuestionState.jsx"
 
 export const TimerCenario03 = () => {
-    const {answered, setAnswered, time, setTime, isFinished, setIsFinished} = useContext(QuestionState)
+    const {answered, setAnswered, time, setTime, isFinished, setIsFinished, setStartQuiz, currentQuiz, setCurrentQuiz} = useContext(QuestionState)
     const [seconds, setSeconds] = useState(time)
     // const middleDiv = useRef(document.getElementById("middleDiv"));
 
@@ -54,8 +54,10 @@ export const TimerCenario03 = () => {
                 // Navegar para próxima pergunta (nova página)
                 setAnswered(false)
                 setSeconds(time)
+                setCurrentQuiz(currentQuiz+1)
+                setStartQuiz(false)
 
-                navigate("/pergunta2");
+                // navigate("/pergunta2");
             }, 2000)
         }
 

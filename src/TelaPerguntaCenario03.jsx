@@ -12,21 +12,33 @@ import { QuestionState } from "./QuestionState.jsx"
 import { TimerCenario03 } from "./components/TimerCenario03.jsx"
 import { AppIcon } from "./components/AppIcon.jsx"
 
-export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, questTotal, question, opts, correctOptIdx }) {
+import perfis from "./perfis.json";
+import programas from "./programas.json";
+import quizes from "./quizes.json";
+
+import video from "./videos/PGM FINALIZADO 03.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
+
+export function TelaPerguntaCenario03() {
+
+    const programasMap = new Map(Object.entries(programas))
+    
+    /*{
+      path: "./videos/PGM FINALIZADO 03.mp4",
+      quizesTimes: [272], // Primeira cartela aparece em 04 min e 32s --> 272 segundos
+    }*/
+
+    // const []
+
+    const videos = useRef(Array())
 
     const numOpt1 = useRef(1);
     const numOpt2 = useRef(1);
     const numOpt3 = useRef(1);
     const numOpt4 = useRef(1);
 
-    const timeLimit = useRef(questTimeLimit)
+    const timeLimit = useRef(quizes["programa01"][0]["questTimeLimit"])
 
     const totalAnswers = 5
-    const questionType = questType
-    /**
-     * questionType 0 == Verdadeiro ou False
-     * questionType 1 == Quatro Opções
-     */
 
     // const questionState = useContext(QuestionState)
     
@@ -35,11 +47,40 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
     const opt3 = useRef(null);
     const opt4 = useRef(null);
 
-    const {answered, setAnswered, time, setTime, isFinished, setIsFinished} = useContext(QuestionState)
+    const {answered, setAnswered, time, setTime, isFinished, setIsFinished, startQuiz, setStartQuiz, currentQuiz, setCurrentQuiz, setQuestTotal, profileSchooling, setProfileSchooling} = useContext(QuestionState)
     const clickedOptId = useRef('')
 
+    const importVideos = (value, key, map) => {
+      /*console.log(key)
+      console.log(value['path'])*/
+
+      import(value['path']).then((importedVideo) => {
+        console.log(importedVideo)
+        videos.current.push(importedVideo)
+      })
+    }
+
+    /*useEffect(() => {
+      console.log(videos.current[0])
+      console.log(video)
+    }, [videos])*/
+
     useEffect(() => {
-      if (!answered) {
+      // console.log(video)
+      /*console.log(programas['programa01']['path'])
+      console.log(quizes['programa01'])*/
+      
+      // console.log(programasMap.get("programa01"))
+
+      // programasMap.forEach(importVideos)
+
+      // Object.entries(programas).ma
+
+      setProfileSchooling(perfis['perfil01']['escolaridade'])
+      setTime(quizes['programa01'][currentQuiz]["questTimeLimit"])
+      setQuestTotal(programasMap.get("programa01")["questTotal"])
+
+      if (!answered && startQuiz) {
         // console.log(opt1.current)
         opt1.current.focus()
         clickedOptId.current = "";
@@ -49,7 +90,7 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
         numOpt3.current = 1
         numOpt4.current = 1
       }
-    }, [answered])
+    }, [answered, startQuiz])
 
     /*useEffect(() => {
       const handleKeyDown = (event) => {
@@ -85,6 +126,17 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
         window.removeEventListener("keydown", handleKeyDown);
       };
     }, [document.activeElement]);*/
+
+    const videoProgress = (elem) => {
+      const video = elem.target
+      // console.log(video.currentTime)
+      console.log(programasMap.get("programa01")["quizesTimes"][currentQuiz])
+      if (video.currentTime >= programasMap.get("programa01")["quizesTimes"][currentQuiz]) {
+        setStartQuiz(true)
+      } /*else if (video.currentTime >= programasMap.get("programa01")["quizesTimes"][currentQuiz] + 60) {
+        setStartQuiz(false)
+      }*/
+    }
 
     const handleClick = (elem) => {
       const className = elem.target.className
@@ -123,7 +175,11 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
 
     return (
         <>
-            <div id="player">
+            <video autoPlay controls muted id="myVideo" onProgress={videoProgress}>
+              <source src={video} type="video/mp4" />
+            </video>
+
+            {startQuiz ? <div id="player">
                 <div id="top" className="header">
                     <div id="icon">
                         {<AppIcon />}
@@ -131,9 +187,9 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
                     <div id="question">
                         {
                             <Question
-                                question={question}
-                                number={questNum}
-                                total={questTotal}
+                                question={quizes["programa01"][currentQuiz]["question"][profileSchooling]}
+                                number={quizes["programa01"][currentQuiz]["questNum"]}
+                                total={programasMap.get("programa01")["questTotal"]}
                             />
                         }
                     </div>
@@ -150,12 +206,16 @@ export function TelaPerguntaCenario03({ questType, questTimeLimit, questNum, que
                 </div>
                 <div className="bottom">
                     {
-                      answered ? <AnswerOptionsCorrect clickedOpt={clickedOptId.current} correctOptId={`opt-${correctOptIdx+1}-alt`} optsText={opts} />
+                      answered ? <AnswerOptionsCorrect clickedOpt={clickedOptId.current} correctOptId={`opt-${quizes["programa01"][currentQuiz]["correctOptIdx"][profileSchooling]+1}-alt`} optsText={quizes["programa01"][currentQuiz]["opts"][profileSchooling]} />
                       :
-                      <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} optsText={opts} correctOption={correctOptIdx} />
+                      <AnswerOptions opt1={opt1} opt2={opt2} opt3={opt3} opt4={opt4} clickFunc={handleClick} optsText={quizes["programa01"][currentQuiz]["opts"][profileSchooling]} correctOption={quizes["programa01"][currentQuiz]["correctOptIdx"][profileSchooling]} />
                     }
                 </div>
             </div>
+            :
+            <></>}
+
+            
         </>
     );
 }

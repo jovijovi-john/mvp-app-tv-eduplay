@@ -1,0 +1,101 @@
+{
+    "programa01": [
+        {
+            "questTimeLimit": 60,
+            "questNum": 1,
+            "opts": [
+                ["estar", "está", "estár", "esta"],
+                [
+                    "A duna de areia branca estar localizada em uma área de conservação ambiental.", 
+                    "Durante a estação chuvosa, as lagoas entre as dunas está completamente cheias.",
+                    "O ecossistema dos Lençóis Maranhenses está ameaçado por mudanças climáticas.",
+                    "Visitar a região sem guia especializado estar sujeito a riscos."
+                ]
+            ],
+            "correctOptIdx": [1, 2],
+            "question": ["A paisagem dos Lençóis Maranhenses ____ cheia de dunas e lagoas cristalinas, um cenário incrível! Qual a forma correta de completar essa frase?", 
+                            "Qual frase apresenta o uso correto do verbo “estar”?"]
+        },
+        {
+            "questTimeLimit": 60,
+            "questNum": 2,
+            "opts": [
+                ["mais", "mas", "maís", "más"],
+                [
+                    "Os Lençóis Maranhenses têm uma das paisagens mais bonitas do Brasil.",
+                    "A região atrai turistas o ano todo, mas nem sempre as lagoas estão cheias.",
+                    "As dunas são altas, mas acessíveis para quem gosta de aventura.",
+                    "Existem poucas áreas preservadas, mais o governo local planeja novas medidas de proteção."
+                ]
+            ],
+            "correctOptIdx": [1, 3],
+            "question": ["Os Lençóis Maranhenses são lindos, _____ é importante ir na época certa para ver as lagoas cheias.", 
+                            "Uma das frases a seguir apresenta erro no uso de 'mais' ou 'mas'. Identifique-a."]
+        },
+        {
+            "questTimeLimit": 60,
+            "questNum": 3,
+            "opts": [
+                ["Norte", "Nordeste", "Centro-Oeste", "Sudeste"],
+                [
+                    "Amazônia e Caatinga",
+                    "Mata Atlântica e Pantanal",
+                    "Pantanal e Amazônia",
+                    "Pampa e Cerrado"
+                ]
+            ],
+            "correctOptIdx": [1, 0],
+            "question": ["Em qual região brasileira está localizado o Parque Nacional dos Lençóis Maranhenses?", 
+                            "O Brasil tem 6 Biomas. O Parque dos Lençóis Maranhenses fica na região do Cerrado. Mas também recebe influência de outros dois Biomas. Você sabe quais são?"]
+        },
+        {
+            "questTimeLimit": 60,
+            "questNum": 4,
+            "opts": [
+                ["Estadia", "Estada", "Estadía", "Estaria"],
+                [
+                    "A nossa estada nos Lençóis Maranhenses foi curta, mas inesquecível.",
+                    "A agência organizou nossa estada no hotel à beira das lagoas.",
+                    "Durante a estadia no parque, fizemos trilhas e visitamos as dunas.",
+                    "A estada no parque e a estada no hotel são o mesmo tipo de viagem."
+                ]
+            ],
+            "correctOptIdx": [1, 0],
+            "question": ["Sobre a visita aos Lençóis Maranhenses, escolha a opção correta: 'Durante nossa ______ no parque, vimos muitas lagoas e dunas.'", 
+                            "Assinale a frase com o uso de estada ou estadia:"]
+        },
+        {
+            "questTimeLimit": 60,
+            "questNum": 5,
+            "opts": [
+                ["Humberto de Campos", "Santo Amaro", "Barreirinhas", "São Luís"],
+                [
+                    "No litoral do Maranhão, com influência dos biomas Cerrado, Amazônia e Caatinga.",
+                    "Na região semiárida do Maranhão, influenciado pelos biomas Caatinga e Mata Atlântica.",
+                    "No litoral do Maranhão, predominando os biomas Cerrado e Pantanal.",
+                    "No Maranhão, dentro do bioma Amazônia."
+                ]
+            ],
+            "correctOptIdx": [3, 0],
+            "question": ["O Parque Nacional dos Lençóis Maranhenses abrange quatro municípios. Qual desses municípios não integra a região do parque? ", 
+                            "O Parque Nacional dos Lençóis Maranhenses está localizado:"]
+        },
+        {
+            "questTimeLimit": 60,
+            "questNum": 6,
+            "opts": [
+                ["Nós assistimos a uma vista espetacular ao pôr do sol nos Lençóis Maranhenses.", "Eu assisti nos Lençóis Maranhenses e fiquei impressionado com as dunas.", "Eles assistiram da lagoa cristalina em meio às dunas.", "Ela assistiu em várias paisagens deslumbrantes."],
+                [
+                    "Muitos turistas desejam assistir as transformações das dunas ao longo do dia.",
+                    "Quem visita os Lençóis Maranhenses pode assistir ao espetáculo das lagoas se enchendo após as chuvas.",
+                    "É comum assistir o nascer do sol sobre as dunas em silêncio.",
+                    "Turistas preferem assistir as mudanças de cor nas lagoas à distância."
+                ]
+            ],
+            "correctOptIdx": [1, 1],
+            "question": ["Qual frase está correta no uso do verbo 'assistir' ao descrever uma experiência nos Lençóis Maranhenses?", 
+                            "Assinale a alternativa em que o uso de “assistir” está adequado no contexto dos Lençóis Maranhenses:"]
+        }
+    ]
+    
+}
