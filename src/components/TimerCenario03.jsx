@@ -10,7 +10,7 @@ export const TimerCenario03 = () => {
 
     const navigate = useNavigate();
 
-    useEffect(() => { // Contagem regressiva
+    useEffect(() => { // Contagem regressiva do timer
         const interval = setInterval(() => {
             if (seconds > 0) {
                 setSeconds(seconds-1)
@@ -24,10 +24,10 @@ export const TimerCenario03 = () => {
         console.log(middleDiv.current)
     }, [answered])*/
 
-    useEffect(() => {
+    useEffect(() => { // Mostrar estatísticas ao final no quiz (timer chega a 0)
         let interval;
         if (seconds === 0) {
-            interval = setInterval(() => {
+            interval = setTimeout(() => {
                 /*const middleDiv = document.getElementById("middleDiv");
                 // const child = middleDiv.firstChild
                 if(middleDiv && middleDiv.childElementCount > 0) {
@@ -43,22 +43,19 @@ export const TimerCenario03 = () => {
         return () => clearInterval(interval)
     }, [seconds])
 
-    useEffect(() => {
+    useEffect(() => { // Mostrar resposta correta e atualizar o contexto do programa ao final do quiz (timer chega a 0)
         let interval;
         if(seconds === 0) {
             setAnswered(true)
             // setIsFinished(true)
-            interval = setInterval(() => {
-                // Navegar para próxima pergunta (nova página)
+            interval = setTimeout(() => {
                 setAnswered(false)
                 setSeconds(time)
                 setStartQuiz(false)
                 
-                // if ()
                 setCurrentQuiz(currentQuiz+1)
                 setIsFinished(false)
 
-                // navigate("/pergunta2");
             }, 2000)
         }
 

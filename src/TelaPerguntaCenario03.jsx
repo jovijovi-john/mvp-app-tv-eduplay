@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useRef, useEffect, useState, useContext } from 'react'
 import "./styles/telaPergunta.css"
+import "./styles/style.css";
 
 import { AnswerOptions } from "./components/AnswerOptions.jsx"
 import { AnswerOptionsCorrect } from "./components/AnswerOptionsCorrect.jsx"
@@ -18,12 +19,19 @@ import quizes from "./quizes.json";
 
 import { socket } from "./services/socket.js"
 
-import pgm4 from "./assets/videos/pgm4.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
+import pgm4 from "./videos/pgm4.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
+
+import logoImg from "./assets/logo.svg";
+import qrcodeImg from "./assets/qrcode.svg";
+import numImg from "./assets/num.svg";
 
 export function TelaPerguntaCenario03() {
 
   const programasMap = new Map(Object.entries(programas))
   const videoElement = useRef();
+  const [PIN, setPIN] = useState('');
+
+  const [connectionTime, setConnectionTime] = useState(true)
 
   const videos = useRef(Array())
 
@@ -45,6 +53,18 @@ export function TelaPerguntaCenario03() {
 
   const { answered, setAnswered, time, setTime, isFinished, setIsFinished, startQuiz, setStartQuiz, currentQuiz, setCurrentQuiz, setQuestTotal, profileSchooling, setProfileSchooling } = useContext(QuestionState)
   const clickedOptId = useRef('')
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  function generatePin() {
+      const pin = getRandomInt(100000, 999999); 
+      // document.getElementById('pin-text').textContent = `PIN ${pin}`;
+      setPIN(pin)
+  }
 
   // const importVideos = (value, key, map) => {
   //   import(value['path']).then((importedVideo) => {
@@ -71,11 +91,18 @@ export function TelaPerguntaCenario03() {
   // }, [answered, startQuiz])
 
   useEffect(() => {
+    // Gerar PIN quando carregar a página
+    generatePin()
+
+    const interval0 = setTimeout(() => {
+      setConnectionTime(false)
+    }, 11000)
+
     // Primeiro Quiz
     const interval = setTimeout(() => {
 
       socket.emit("start-quiz", {
-        pin: "1234",
+        pin: PIN,
       });
 
       setStartQuiz(true)
@@ -84,7 +111,7 @@ export function TelaPerguntaCenario03() {
     // Segundo Quiz
     const interval2 = setTimeout(() => {
       socket.emit("start-question", {
-        pin: "1234",
+        pin: PIN,
         questionNumber: 2
       });
 
@@ -96,7 +123,7 @@ export function TelaPerguntaCenario03() {
     const interval3 = setTimeout(() => {
       setStartQuiz(true)
       socket.emit("start-question", {
-        pin: "1234",
+        pin: PIN,
         questionNumber: 3
       });
     }, 485000)
@@ -105,7 +132,7 @@ export function TelaPerguntaCenario03() {
     const interval4 = setTimeout(() => {
 
       socket.emit("start-question", {
-        pin: "1234",
+        pin: PIN,
         questionNumber: 4
       });
 
@@ -116,7 +143,7 @@ export function TelaPerguntaCenario03() {
     // Quinto Quiz
     const interval5 = setTimeout(() => {
       socket.emit("start-question", {
-        pin: "1234",
+        pin: PIN,
         questionNumber: 5
       });
       setStartQuiz(true)
@@ -126,7 +153,7 @@ export function TelaPerguntaCenario03() {
     const interval6 = setTimeout(() => {
 
       socket.emit("start-question", {
-        pin: "1234",
+        pin: PIN,
         questionNumber: 6
       });
 
@@ -141,6 +168,7 @@ export function TelaPerguntaCenario03() {
     return () => {
       socket.off("start-quiz")
       socket.off("get-final-statistics")
+      clearInterval(interval0)
       clearInterval(interval)
       clearInterval(interval2)
       clearInterval(interval3)
@@ -191,6 +219,27 @@ export function TelaPerguntaCenario03() {
       <video autoPlay controls muted id="myVideo" ref={videoElement}>
         <source src={pgm4} type="video/mp4" />
       </video>
+
+      {
+      connectionTime ? <section>
+          <div className="topLeft">
+            <div className="logoEdu">
+                <img src={logoImg} alt="logoEduQuiz" />
+            </div>
+            <div className="qrcode">
+              <img src={qrcodeImg} alt="QRCODE" />
+            </div>
+          </div>
+          <div className="txt">
+            <h1 id="pin-text">PIN {PIN}</h1>
+          </div>
+          <div className="num">
+            <img src={numImg} alt="num" />
+          </div>
+      </section>
+      :
+      <></>
+      }
 
       {startQuiz ? <div id="player">
         <div id="top" className="header">
