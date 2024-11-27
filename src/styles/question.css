@@ -3,13 +3,13 @@
     border-radius: 10px;
     background-color: white;
     color: #019DD8;
-    font-size: 1.25rem;
+    font-size: 2.5rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .bottom-text {
     color: white;
-    font-size: 2rem;
+    font-size: 3.5rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     
     /*-webkit-text-stroke-width: 2px;

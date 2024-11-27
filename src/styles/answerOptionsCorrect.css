@@ -1,11 +1,12 @@
 .bottom-options {
     position: absolute;
-    bottom: 50px;
-    width: 72%;
-    height: 25.4%;
+    /*bottom: 50px;*/
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
     border-radius: 56px;
 }

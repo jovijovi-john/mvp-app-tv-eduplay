@@ -40,8 +40,6 @@ export const TimerCenario03 = () => {
             }, 500)
         }
 
-        setIsFinished(false)
-
         return () => clearInterval(interval)
     }, [seconds])
 
@@ -54,8 +52,11 @@ export const TimerCenario03 = () => {
                 // Navegar para próxima pergunta (nova página)
                 setAnswered(false)
                 setSeconds(time)
-                setCurrentQuiz(currentQuiz+1)
                 setStartQuiz(false)
+                
+                // if ()
+                setCurrentQuiz(currentQuiz+1)
+                setIsFinished(false)
 
                 // navigate("/pergunta2");
             }, 2000)

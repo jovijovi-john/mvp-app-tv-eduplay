@@ -1,11 +1,12 @@
 .bottom-options {
     position: absolute;
-    bottom: 50px;
-    width: 72%;
-    height: 25.4%;
+    /*bottom: 50px;*/
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
     /*background-color: white;*/
     border-radius: 56px;
@@ -52,7 +53,7 @@
     margin-right: 2px;
     border-radius: 56px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 3rem;
+    font-size: 2.1rem;
     color: #1376BC;
 
     /*-webkit-text-stroke-width: 2px;
@@ -61,18 +62,19 @@
 
 .opt-icon {
     position: absolute;
-    left: 10px;
-    height: 100%;
-    width: 18%;
-    margin-bottom: -5%;
+    left: -15px;
+    height: 90%;
+    width: 8%;
+    margin-bottom: -1.5%;
 }
 
 .answer-opt2-div, .answer-opt-div {
     position: relative;
-    width: 48.3%;
+    width: 90%;
     height: 100px;
     display: flex;
     align-items: center;
+    padding-bottom: 10px;
 }
 
 /*#opt-1{

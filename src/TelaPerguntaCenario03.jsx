@@ -16,7 +16,7 @@ import perfis from "./perfis.json";
 import programas from "./programas.json";
 import quizes from "./quizes.json";
 
-import video from "./videos/PGM FINALIZADO 03.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
+import video from "./videos/PGM FINALIZADO 04.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
 
 export function TelaPerguntaCenario03() {
 
@@ -80,6 +80,14 @@ export function TelaPerguntaCenario03() {
       setTime(quizes['programa01'][currentQuiz]["questTimeLimit"])
       setQuestTotal(programasMap.get("programa01")["questTotal"])
 
+      /*if (perfis['perfil01']['escolaridade'] === 0 && startQuiz) {
+        const elem = document.getElementsByClassName("answer-opt")
+        for(let i = 0; i < elem.length; i++) {
+          console.log(elem[i].className)
+          elem[i].className = "answer-opt-"
+        }
+      }*/
+
       if (!answered && startQuiz) {
         // console.log(opt1.current)
         opt1.current.focus()
@@ -130,8 +138,10 @@ export function TelaPerguntaCenario03() {
     const videoProgress = (elem) => {
       const video = elem.target
       // console.log(video.currentTime)
-      console.log(programasMap.get("programa01")["quizesTimes"][currentQuiz])
+      // console.log(programasMap.get("programa01")["quizesTimes"][currentQuiz])
       if (video.currentTime >= programasMap.get("programa01")["quizesTimes"][currentQuiz]) {
+        console.log(video.currentTime)
+        console.log(programasMap.get("programa01")["quizesTimes"][currentQuiz])
         setStartQuiz(true)
       } /*else if (video.currentTime >= programasMap.get("programa01")["quizesTimes"][currentQuiz] + 60) {
         setStartQuiz(false)
@@ -184,25 +194,29 @@ export function TelaPerguntaCenario03() {
                     <div id="icon">
                         {<AppIcon />}
                     </div>
-                    <div id="question">
-                        {
-                            <Question
-                                question={quizes["programa01"][currentQuiz]["question"][profileSchooling]}
-                                number={quizes["programa01"][currentQuiz]["questNum"]}
-                                total={programasMap.get("programa01")["questTotal"]}
-                            />
-                        }
-                    </div>
                     <div id="timer">
                         {<TimerCenario03 />}
                     </div>
                 </div>
                 <div id="middleDiv" className="middle">
-                    {answered ? <QuestionStatistics
+                    {
+                    isFinished ? <QuestionStatistics
                       opt1_stat={(numOpt1.current/totalAnswers)*100}
                       opt2_stat={(numOpt2.current/totalAnswers)*100}
                       opt3_stat={(numOpt3.current/totalAnswers)*100}
-                      opt4_stat={(numOpt4.current/totalAnswers)*100} /> : <></>}
+                      opt4_stat={(numOpt4.current/totalAnswers)*100} />
+                      :
+                      <><div id="question">
+                          {
+                              <Question
+                                  question={quizes["programa01"][currentQuiz]["question"][profileSchooling]}
+                                  number={quizes["programa01"][currentQuiz]["questNum"]}
+                                  total={programasMap.get("programa01")["questTotal"]}
+                              />
+                          }
+                      </div>
+                      </>
+                    }
                 </div>
                 <div className="bottom">
                     {

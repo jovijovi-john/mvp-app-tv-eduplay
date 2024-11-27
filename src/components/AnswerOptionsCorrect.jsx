@@ -47,7 +47,7 @@ export const AnswerOptionsCorrect = ({ clickedOpt, correctOptId, optsText }) => 
             showCorrect(correctOptId); // muda a cor de fundo das opções de resposta para mostrar a correta
         }
 
-        setIsFinished(false)
+        // setIsFinished(false)
     }, [isFinished])
 
     return (
