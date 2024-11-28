@@ -19,17 +19,18 @@ import quizes from "./quizes.json";
 
 import { socket } from "./services/socket.js"
 
-import pgm4 from "./videos/pgm4.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
+import pgm4 from "./assets/videos/pgm4.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
 
 import logoImg from "./assets/logo.svg";
 import qrcodeImg from "./assets/qrcode.svg";
 import numImg from "./assets/num.svg";
+import { useLocation } from 'react-router-dom';
 
 export function TelaPerguntaCenario03() {
 
   const programasMap = new Map(Object.entries(programas))
   const videoElement = useRef();
-  const [PIN, setPIN] = useState('');
+  const location = useLocation();
 
   const [connectionTime, setConnectionTime] = useState(true)
 
@@ -54,45 +55,9 @@ export function TelaPerguntaCenario03() {
   const { answered, setAnswered, time, setTime, isFinished, setIsFinished, startQuiz, setStartQuiz, currentQuiz, setCurrentQuiz, setQuestTotal, profileSchooling, setProfileSchooling } = useContext(QuestionState)
   const clickedOptId = useRef('')
 
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  
-  function generatePin() {
-      const pin = getRandomInt(100000, 999999); 
-      // document.getElementById('pin-text').textContent = `PIN ${pin}`;
-      setPIN(pin)
-  }
-
-  // const importVideos = (value, key, map) => {
-  //   import(value['path']).then((importedVideo) => {
-  //     console.log(importedVideo)
-  //     videos.current.push(importedVideo)
-  //   })
-  // }
-
-  // useEffect(() => {
-
-  //   setProfileSchooling(perfis['perfil01']['escolaridade'])
-  //   setTime(quizes['programa01'][currentQuiz]["questTimeLimit"])
-  //   setQuestTotal(programasMap.get("programa01")["questTotal"])
-
-
-  //   if (!answered && startQuiz) {
-  //     opt1.current.focus()
-  //     clickedOptId.current = "";
-  //     numOpt1.current = 1
-  //     numOpt2.current = 1
-  //     numOpt3.current = 1
-  //     numOpt4.current = 1
-  //   }
-  // }, [answered, startQuiz])
+  const { pin } = location.state;
 
   useEffect(() => {
-    // Gerar PIN quando carregar a página
-    generatePin()
 
     const interval0 = setTimeout(() => {
       setConnectionTime(false)
@@ -101,8 +66,8 @@ export function TelaPerguntaCenario03() {
     // Primeiro Quiz
     const interval = setTimeout(() => {
 
-      socket.emit("start-quiz", {
-        pin: PIN,
+      socket.emit("start-question", {
+        pin,
       });
 
       setStartQuiz(true)
@@ -111,8 +76,7 @@ export function TelaPerguntaCenario03() {
     // Segundo Quiz
     const interval2 = setTimeout(() => {
       socket.emit("start-question", {
-        pin: PIN,
-        questionNumber: 2
+        pin,
       });
 
       setStartQuiz(true)
@@ -123,8 +87,7 @@ export function TelaPerguntaCenario03() {
     const interval3 = setTimeout(() => {
       setStartQuiz(true)
       socket.emit("start-question", {
-        pin: PIN,
-        questionNumber: 3
+        pin,
       });
     }, 485000)
 
@@ -132,8 +95,7 @@ export function TelaPerguntaCenario03() {
     const interval4 = setTimeout(() => {
 
       socket.emit("start-question", {
-        pin: PIN,
-        questionNumber: 4
+        pin,
       });
 
       setStartQuiz(true)
@@ -143,8 +105,7 @@ export function TelaPerguntaCenario03() {
     // Quinto Quiz
     const interval5 = setTimeout(() => {
       socket.emit("start-question", {
-        pin: PIN,
-        questionNumber: 5
+        pin,
       });
       setStartQuiz(true)
     }, 879000)
@@ -153,8 +114,7 @@ export function TelaPerguntaCenario03() {
     const interval6 = setTimeout(() => {
 
       socket.emit("start-question", {
-        pin: PIN,
-        questionNumber: 6
+        pin,
       });
 
       setStartQuiz(true)
@@ -221,24 +181,24 @@ export function TelaPerguntaCenario03() {
       </video>
 
       {
-      connectionTime ? <section>
+        connectionTime ? <section>
           <div className="topLeft">
             <div className="logoEdu">
-                <img src={logoImg} alt="logoEduQuiz" />
+              <img src={logoImg} alt="logoEduQuiz" />
             </div>
             <div className="qrcode">
               <img src={qrcodeImg} alt="QRCODE" />
             </div>
           </div>
           <div className="txt">
-            <h1 id="pin-text">PIN {PIN}</h1>
+            <h1 id="pin-text">PIN {pin}</h1>
           </div>
           <div className="num">
             <img src={numImg} alt="num" />
           </div>
-      </section>
-      :
-      <></>
+        </section>
+          :
+          <></>
       }
 
       {startQuiz ? <div id="player">
