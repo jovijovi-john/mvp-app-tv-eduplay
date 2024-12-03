@@ -56,7 +56,7 @@ export const TimerCenario03 = () => {
                 setCurrentQuiz(currentQuiz+1)
                 setIsFinished(false)
 
-            }, 2000)
+            }, 10000)
         }
 
         return () => clearInterval(interval)

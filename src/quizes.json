@@ -1,7 +1,7 @@
 {
     "programa01": [
         {
-            "questTimeLimit": 60,
+            "questTimeLimit": 50,
             "questNum": 1,
             "opts": [
                 ["estar", "está", "estár", "esta"],
@@ -17,7 +17,7 @@
                             "Qual frase apresenta o uso correto do verbo “estar”?"]
         },
         {
-            "questTimeLimit": 60,
+            "questTimeLimit": 50,
             "questNum": 2,
             "opts": [
                 ["mais", "mas", "maís", "más"],
@@ -33,7 +33,7 @@
                             "Uma das frases a seguir apresenta erro no uso de 'mais' ou 'mas'. Identifique-a."]
         },
         {
-            "questTimeLimit": 60,
+            "questTimeLimit": 50,
             "questNum": 3,
             "opts": [
                 ["Norte", "Nordeste", "Centro-Oeste", "Sudeste"],
@@ -49,7 +49,7 @@
                             "O Brasil tem 6 Biomas. O Parque dos Lençóis Maranhenses fica na região do Cerrado. Mas também recebe influência de outros dois Biomas. Você sabe quais são?"]
         },
         {
-            "questTimeLimit": 60,
+            "questTimeLimit": 50,
             "questNum": 4,
             "opts": [
                 ["Estadia", "Estada", "Estadía", "Estaria"],
@@ -62,10 +62,10 @@
             ],
             "correctOptIdx": [1, 0],
             "question": ["Sobre a visita aos Lençóis Maranhenses, escolha a opção correta: 'Durante nossa ______ no parque, vimos muitas lagoas e dunas.'", 
-                            "Assinale a frase com o uso de estada ou estadia:"]
+                            "Assinale a frase com o uso incorreto de estada ou estadia:"]
         },
         {
-            "questTimeLimit": 60,
+            "questTimeLimit": 50,
             "questNum": 5,
             "opts": [
                 ["Humberto de Campos", "Santo Amaro", "Barreirinhas", "São Luís"],
@@ -81,7 +81,7 @@
                             "O Parque Nacional dos Lençóis Maranhenses está localizado:"]
         },
         {
-            "questTimeLimit": 60,
+            "questTimeLimit": 50,
             "questNum": 6,
             "opts": [
                 ["Nós assistimos a uma vista espetacular ao pôr do sol nos Lençóis Maranhenses.", "Eu assisti nos Lençóis Maranhenses e fiquei impressionado com as dunas.", "Eles assistiram da lagoa cristalina em meio às dunas.", "Ela assistiu em várias paisagens deslumbrantes."],

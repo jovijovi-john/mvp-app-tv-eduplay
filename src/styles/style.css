@@ -51,4 +51,57 @@ section{
     width: 30%;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    padding-right: 15px;
+    height: 100%;
+}
+
+.num .connectedNumber {
+    width: 118px;
+    height: 118px;
+    background-color: white;
+    border-radius: 60px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color:rgba(19, 118, 188, 1);
+}
+
+.dropdown-content {
+    display: none; /* Hide the dropdown menu by default */
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    right: 40px;
+    top: 155px;
+    width: 30%;
+    border-radius: 5px;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-content div h3 {
+  text-decoration: none;
+  color:rgba(19, 118, 188, 1);
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.user img, .user h3 {
+    margin: 5px;
 }

@@ -19,11 +19,12 @@ import quizes from "./quizes.json";
 
 import { socket } from "./services/socket.js"
 
-import pgm4 from "./assets/videos/pgm4.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
+import pgm4 from "./videos/pgm4.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
 
 import logoImg from "./assets/logo.svg";
 import qrcodeImg from "./assets/qrcode.svg";
 import numImg from "./assets/num.svg";
+import avatarIcon from "./assets/Avatar.svg";
 import { useLocation } from 'react-router-dom';
 
 export function TelaPerguntaCenario03() {
@@ -42,6 +43,7 @@ export function TelaPerguntaCenario03() {
   const numOpt4 = useRef(1);
 
   const timeLimit = useRef(quizes["programa01"][0]["questTimeLimit"])
+  const cartelaTimestamps = useRef(programasMap.get("programa01").quizesTimes)
 
   const totalAnswers = 5
 
@@ -58,33 +60,44 @@ export function TelaPerguntaCenario03() {
   const { pin } = location.state;
 
   useEffect(() => {
+    console.log(cartelaTimestamps.current)
+    const intervals = []
 
     const interval0 = setTimeout(() => {
       setConnectionTime(false)
     }, 11000)
 
+    for(let i = 0; i < cartelaTimestamps.current.length; i++) {
+      const interval = setTimeout(() => {
+  
+        socket.emit("start-question", {
+          pin,
+        });
+  
+        setTime(quizes["programa01"][currentQuiz]['questTimeLimit'])
+        setStartQuiz(true)
+      }, cartelaTimestamps.current[i]*1000)
+
+      intervals.push(interval)
+    }
+
+
     // Primeiro Quiz
-    const interval = setTimeout(() => {
-
-      socket.emit("start-question", {
-        pin,
-      });
-
-      setStartQuiz(true)
-    }, 12000)
 
     // Segundo Quiz
-    const interval2 = setTimeout(() => {
+    /*const interval2 = setTimeout(() => {
       socket.emit("start-question", {
         pin,
       });
 
+      setTime(quizes["programa01"][currentQuiz]['questTimeLimit'])
       setStartQuiz(true)
 
     }, 415000)
 
     // Terceiro Quiz
     const interval3 = setTimeout(() => {
+      setTime(quizes["programa01"][currentQuiz]['questTimeLimit'])
       setStartQuiz(true)
       socket.emit("start-question", {
         pin,
@@ -98,6 +111,7 @@ export function TelaPerguntaCenario03() {
         pin,
       });
 
+      setTime(quizes["programa01"][currentQuiz]['questTimeLimit'])
       setStartQuiz(true)
 
     }, 624000)
@@ -107,6 +121,7 @@ export function TelaPerguntaCenario03() {
       socket.emit("start-question", {
         pin,
       });
+      setTime(quizes["programa01"][currentQuiz]['questTimeLimit'])
       setStartQuiz(true)
     }, 879000)
 
@@ -117,30 +132,41 @@ export function TelaPerguntaCenario03() {
         pin,
       });
 
+      setTime(quizes["programa01"][currentQuiz]['questTimeLimit'])
       setStartQuiz(true)
-    }, 1024000)
+    }, 1024000)*/
 
     socket.on("get-final-statistics", (data) => {
       // Mostrar quantidade total de acertos totais
       // Mostrar quantidade total de erros totais
     })
 
-    return () => {
+    return () =>  {
       socket.off("start-quiz")
       socket.off("get-final-statistics")
       clearInterval(interval0)
-      clearInterval(interval)
+      for(let i = 0; i < cartelaTimestamps.current.length; i++) {
+        clearInterval(intervals[i])
+      }
+      /*clearInterval(interval)
       clearInterval(interval2)
       clearInterval(interval3)
       clearInterval(interval4)
       clearInterval(interval5)
-      clearInterval(interval6)
+      clearInterval(interval6)*/
     }
   }, [])
 
   useEffect(() => {
     if (isFinished) {
       socket.emit("finish-quiz")
+      
+      numOpt1.current = 1
+      numOpt2.current = 1
+      numOpt3.current = 1
+      numOpt4.current = 1
+
+      clickedOptId.current = ''
     }
 
   }, [isFinished])
@@ -190,11 +216,40 @@ export function TelaPerguntaCenario03() {
               <img src={qrcodeImg} alt="QRCODE" />
             </div>
           </div>
+          
           <div className="txt">
             <h1 id="pin-text">PIN {pin}</h1>
           </div>
-          <div className="num">
-            <img src={numImg} alt="num" />
+
+          <div className="num" onClick={() => {
+            document.querySelector('.dropdown-content').classList.toggle('show')
+          }}>
+            <div className="connectedNumber"> {/* Círculo branco onde deve ficar a quantidade de telespectadores conectados */}
+              <h3>4</h3> {/* Quantidade de telespectadores conectados */}
+            </div>
+
+            <div className="dropdown-content">
+              <div className='user'>
+                <img src={avatarIcon} alt="User Avatar" />
+                <h3>Player 1</h3>
+              </div>
+
+              <div className='user'>
+                <img src={avatarIcon} alt="User Avatar" />
+                <h3>Player 2</h3>
+              </div>
+
+              <div className='user'>
+                <img src={avatarIcon} alt="User Avatar" />
+                <h3>Player 3</h3>
+              </div>
+
+              <div className='user'>
+                <img src={avatarIcon} alt="User Avatar" />
+                <h3>Player 4</h3>
+              </div>
+
+            </div>
           </div>
         </section>
           :
