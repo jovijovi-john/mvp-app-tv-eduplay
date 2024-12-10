@@ -19,7 +19,7 @@ import quizes from "./quizes.json";
 
 import { socket } from "./services/socket.js"
 
-import pgm4 from "./videos/pgm4.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
+import pgm5 from "./videos/PGM FINALIZADO 05.mp4"; // Usar um JSON para guardar o nome do programa e os timestamps das cartelas, para sincronizar com o quiz
 
 import logoImg from "./assets/logo.svg";
 import qrcodeImg from "./assets/qrcode.svg";
@@ -60,6 +60,7 @@ export function TelaPerguntaCenario03() {
   const { pin } = location.state;
 
   useEffect(() => {
+    setProfileSchooling(perfis['perfil01']['escolaridade'])
     console.log(cartelaTimestamps.current)
     const intervals = []
 
@@ -203,7 +204,7 @@ export function TelaPerguntaCenario03() {
   return (
     <>
       <video autoPlay controls muted id="myVideo" ref={videoElement}>
-        <source src={pgm4} type="video/mp4" />
+        <source src={pgm5} type="video/mp4" />
       </video>
 
       {
