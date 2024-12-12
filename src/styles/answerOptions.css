@@ -50,7 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 100px;
+    padding: 0 150px;
     margin-left: 2px;
     margin-right: 2px;
     border-radius: 56px;
@@ -60,6 +60,14 @@
 
     /*-webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;*/
+}
+
+.opt-letter {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 3rem;
+    color: #1376BC;
+    position: absolute;
+    left: 5.5%;
 }
 
 .opt-icon {
@@ -76,6 +84,7 @@
     height: 12%;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding-bottom: 10px;
 }
 

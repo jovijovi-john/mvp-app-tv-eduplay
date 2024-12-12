@@ -54,6 +54,7 @@ export const AnswerOptionsCorrect = ({ clickedOpt, correctOptId, optsText }) => 
         <div className="bottom-options">
             <div className="answer-opt-div">
                 <img src={red_option_icon} alt="Opção Vermelha" className="opt-icon" />
+                <div className="opt-letter">a)</div>
                 <button type="button" key="0" id="opt-1-alt" className="answer-opt">
                     {optsText[0]}
                 </button>
@@ -62,6 +63,7 @@ export const AnswerOptionsCorrect = ({ clickedOpt, correctOptId, optsText }) => 
             </div>
             <div className="answer-opt-div">
                 <img src={green_option_icon} alt="Opção Verde" className="opt-icon" />
+                <div className="opt-letter">b)</div>
                 <button type="button" key="1" id="opt-2-alt" className="answer-opt">
                     {optsText[1]}
                 </button>
@@ -70,6 +72,7 @@ export const AnswerOptionsCorrect = ({ clickedOpt, correctOptId, optsText }) => 
             </div>
             <div className="answer-opt-div">
                 <img src={yellow_option_icon} alt="Opção Amarela" className="opt-icon" />
+                <div className="opt-letter">c)</div>
                 <button type="button" key="2" id="opt-3-alt" className="answer-opt">
                     {optsText[2]}
                 </button>
@@ -78,6 +81,7 @@ export const AnswerOptionsCorrect = ({ clickedOpt, correctOptId, optsText }) => 
             </div>
             <div className="answer-opt-div">
                 <img src={blue_option_icon} alt="Opção Azul" className="opt-icon" />
+                <div className="opt-letter">d)</div>
                 <button type="button" key="3" id="opt-4-alt" className="answer-opt">
                     {optsText[3]}
                 </button>

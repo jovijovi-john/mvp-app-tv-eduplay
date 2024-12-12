@@ -21,6 +21,7 @@ export const AnswerOptions = ({ opt1, opt2, opt3, opt4, clickFunc, optsText }) =
         <div className="bottom-options">
             <div className="answer-opt-div">
                 <img src={red_option_icon} alt="Opção Vermelha" className="opt-icon" />
+                <div className="opt-letter">a)</div>
                 <button type="button" ref={opt1} key="0" id="opt-1" className="answer-opt" onClick={clickFunc}>
                     {optsText[0]}
                 </button>
@@ -28,6 +29,7 @@ export const AnswerOptions = ({ opt1, opt2, opt3, opt4, clickFunc, optsText }) =
             </div>
             <div className="answer-opt-div">
                 <img src={green_option_icon} alt="Opção Verde" className="opt-icon" />
+                <div className="opt-letter">b)</div>
                 <button type="button" ref={opt2} key="1" id="opt-2" className="answer-opt" onClick={clickFunc}>
                     {optsText[1]}
                 </button>
@@ -35,6 +37,7 @@ export const AnswerOptions = ({ opt1, opt2, opt3, opt4, clickFunc, optsText }) =
             </div>
             <div className="answer-opt-div">
                 <img src={yellow_option_icon} alt="Opção Amarela" className="opt-icon" />
+                <div className="opt-letter">c)</div>
                 <button type="button" ref={opt3} key="2" id="opt-3" className="answer-opt" onClick={clickFunc}>
                     {optsText[2]}
                 </button>
@@ -42,6 +45,7 @@ export const AnswerOptions = ({ opt1, opt2, opt3, opt4, clickFunc, optsText }) =
             </div>
             <div className="answer-opt-div">
                 <img src={blue_option_icon} alt="Opção Azul" className="opt-icon" />
+                <div className="opt-letter">d)</div>
                 <button type="button" ref={opt4} key="3" id="opt-4" className="answer-opt" onClick={clickFunc}>
                     {optsText[3]}
                 </button>
